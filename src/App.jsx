@@ -1,15 +1,18 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Switch, Route } from "react-router-dom";
 import "./App.css";
+import HomePage from "./Pages/HomePage";
+import ProfilePage from "./Pages/ProfilePage";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <h1>App</h1>
-    </>
+    <Switch>
+      <Route path="/">
+        <HomePage />
+      </Route>
+      <Route path="/profile">
+        <ProfilePage />
+      </Route>
+    </Switch>
   );
 }
 
