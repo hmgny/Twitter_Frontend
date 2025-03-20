@@ -1,42 +1,258 @@
-#root {
-  max-width: 1280px;
+body {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh;
+}
+
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  align-items: center; 
+}
+
+.layout-content {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  max-width: 1200px;
+  width: 100%; 
+}
+
+.sidebar {
+  position: relative; 
+  height: auto; 
+  width: 25%;
+  background-color: white;
+  padding: 30px;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bold {
+  font-weight: bold;
+  font-size: large;
+}
+
+.sidebar ul { 
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar a {
+  color: black;
+  text-decoration: none;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-direction: row;
+}
+
+.profile img {
+  width: 50px; 
+  height: 50px; 
+  border-radius: 50%; 
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.profile span {
+  color: black;
+  font-weight: bold;
+}
+
+.button-gonderi {
+    color: white;
+    background-color : black;
+    padding: 12px 20px;
+    border-radius: 30px;
+    width: 100%; 
+    text-align: center; 
+}
+
+.button-cikis {
+    color: black; 
+    background-color: white; 
+    padding: 12px 20px;
+    border-radius: 30px;
+    width: 100%; 
+    text-align: center; 
+    border: 1px solid black; 
+}
+
+.home {
+  display: flex;
+  align-items: center;
+  margin: 0 350px;
+}
+
+.tweet {
+  display: flex;
+  flex-direction: column;
+  padding: 10px; 
+  width: 75vb;
+  font-family: 'Arial', sans-serif;
+  border: 1px solid #e1e8ed;
+
+}
+
+.userProfile {
+  display: flex;
+  justify-content: flex-start; 
+  align-items: center;
+  gap: 10px; 
+  padding: 10px; 
+  height: auto; 
+}
+
+.userProfile img {
+  width: 7%; 
+  height: 7%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userProfile span {
+  font-weight: bold;
+  font-size: 14px; 
+}
+
+.tweet p {
+  font-size: 14px;
+  margin: 0 10px; 
+  line-height: 1.4; 
+}
+
+.tweet_img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 65%;
+  aspect-ratio: 1/1;
+  border-radius: 10px;  
   margin: 0 auto;
-  padding: 2rem;
+}
+
+.button-tweets {
+  display: flex;
+  justify-content: space-around;
+  padding: 5px 0; 
   text-align: center;
+  border-top: 1px solid #e1e8ed; 
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.button-tweet {
+  color: #657786;
+  background-color: white;
+  border: none;
+  width: 100%;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  padding: 5px; 
+  cursor: pointer; 
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.button-tweet:hover {
+  color:black;
 }
 
-.card {
-  padding: 2em;
+.button-tweet svg {
+  width: 20px; 
+  height: 20px;
 }
 
-.read-the-docs {
-  color: #888;
+.button-tweet.active {
+  color: black; /* Change the color when active */
+}
+
+.main {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px; 
+  padding: 40px 80px; 
+  border-radius: 10px; 
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  margin: 0 auto; 
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #555;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid #ddd;
+  border-radius: 6px; 
+  box-sizing: border-box;
+  font-size: 16px; 
+}
+
+.login-button {
+  background-color: black;
+  color: white;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px; 
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: black;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+.signup-link-text {
+  color: #007bff;
+  text-decoration: none;
 }
