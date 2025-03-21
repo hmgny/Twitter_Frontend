@@ -51,11 +51,14 @@ export const getAllTweets = async () => {
     }
 };
 
-export const createTweet = async (userId, tweetText) => {
+export const createTweet = async (newTweet) => {
     try {
-        const response = await axios.post(`${API_URL}/tweet/user`, {
-            userId: userId,
-            tweetText: tweetText,
+        const token = localStorage.getItem('authToken');
+        console.log("API'ye gönderilen tweet verisi:", newTweet);
+        const response = await axios.post(`${API_URL}/tweet/user`, newTweet, {
+            headers: {
+                Authorization: `Basic ${authToken}`,
+            },
         });
         return response.data;
     } catch (error) {
