@@ -12,8 +12,19 @@ import {
   User,
   MoreHorizontal,
 } from "lucide-react";
+import { Avatar } from "@mui/material";
+import { useEffect, useState } from "react";
 
 const SideBar = () => {
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
+
   return (
     <div className="sidebar">
       <h1>Twitter</h1>
@@ -86,10 +97,10 @@ const SideBar = () => {
         </li>
       </ul>
       <button className="button-gonderi">Gönderi Yayınla</button>
-      <div className="profile">
-        <img src="/img/profil.png" alt="Profile" />
-        <span>Hanife Merve Önal</span>
-      </div>
+      <Link to="/profile" className="tweet-form-header">
+        <Avatar alt={username} src="/img/default-avatar.png" />
+        <p className="username">{username}</p>
+      </Link>
       <button className="button-cikis">Çıkış Yap</button>
     </div>
   );
