@@ -57,8 +57,8 @@ const TweetItem = ({ tweet, userId, onDelete, onUpdate }) => {
   return (
     <div className="tweet">
       <div className="userProfile">
-        <Avatar alt={tweet.user?.userName} src="/img/default-avatar.png" />
-        <span className="username">{tweet.user?.userName}</span>{" "}
+        <Avatar alt={tweet.username} src="/img/default-avatar.png" />
+        <span className="username">{tweet.username}</span>{" "}
       </div>
       {isEditing ? (
         <textarea

@@ -47,7 +47,12 @@ const TweetList = () => {
   return (
     <div>
       {tweets.map((tweet) => (
-        <TweetItem key={tweet.id} tweet={tweet} userId={userId} />
+        <TweetItem
+          key={tweet.id}
+          tweet={tweet}
+          username={tweet.username}
+          userId={userId}
+        />
       ))}
     </div>
   );
