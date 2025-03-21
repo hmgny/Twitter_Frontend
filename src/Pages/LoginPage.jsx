@@ -16,6 +16,8 @@ const LoginPage = ({ setAuthenticated }) => {
       console.log("Login successful:", response.data);
       toast.success("Login successful!");
       history.push("/home");
+      localStorage.setItem("userId", response.data.id); // Store userId
+      localStorage.setItem("username", response.data.userName);
       const authToken = btoa(`${username}:${password}`);
       localStorage.setItem("authToken", authToken);
     } catch (error) {
@@ -61,7 +63,7 @@ const LoginPage = ({ setAuthenticated }) => {
         </button>
         <p className="signup-link">
           Don't have an account?
-          <a href="/register" className="signup-link-text">
+          <a href="/signup" className="signup-link-text">
             Sign Up
           </a>
         </p>
