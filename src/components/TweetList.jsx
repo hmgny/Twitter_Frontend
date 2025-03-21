@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Heart, Repeat, MessageSquare } from "lucide-react";
 import { fetchTweets } from "../utils/api";
 import TweetItem from "./TweetItem";
 
@@ -26,6 +24,10 @@ const TweetList = () => {
 
     getTweets();
   }, []);
+
+  const handleNewTweet = (newTweet) => {
+    setTweets([newTweet, ...tweets]);
+  };
 
   const handleLike = async () => {
     console.log("Like clicked");

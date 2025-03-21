@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Heart, Repeat, MessageSquare, Edit, Trash2 } from "lucide-react";
 import { deleteTweet, updateTweet } from "../utils/api";
+import Avatar from "@mui/material/Avatar";
 
 const TweetItem = ({ tweet, userId, onDelete, onUpdate }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editText, setEditText] = useState(tweet?.tweetText || ""); // Use optional chaining
+  const [editText, setEditText] = useState(tweet?.tweetText || "");
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(tweet?.likeCount || 0); // Use optional chaining
+  const [likeCount, setLikeCount] = useState(tweet?.likeCount || 0);
   const [isRetweeted, setIsRetweeted] = useState(false);
-  const [retweetCount, setRetweetCount] = useState(tweet?.retweetCount || 0); // Use optional chaining
+  const [retweetCount, setRetweetCount] = useState(tweet?.retweetCount || 0);
 
   const handleDelete = async () => {
     try {
@@ -34,27 +35,30 @@ const TweetItem = ({ tweet, userId, onDelete, onUpdate }) => {
   const handleLike = () => {
     setIsLiked(!isLiked);
     setLikeCount(isLiked ? likeCount - 1 : likeCount + 1);
-    // Implement like functionality
     console.log("Like clicked for tweet:", tweet.id);
   };
 
   const handleRetweet = () => {
     setIsRetweeted(!isRetweeted);
     setRetweetCount(isRetweeted ? retweetCount - 1 : retweetCount + 1);
-    // Implement retweet functionality
     console.log("Retweet clicked for tweet:", tweet.id);
   };
 
   const handleComment = () => {
-    // Implement comment functionality
     console.log("Comment clicked for tweet:", tweet.id);
   };
+
+  const getTweetImageUrl = () => {
+    return `https://picsum.photos/200/300?random=${Math.random()}`;
+  };
+
+  const tweetImageUrl = useMemo(() => getTweetImageUrl(), []);
 
   return (
     <div className="tweet">
       <div className="userProfile">
-        <img src="/img/profil.png" alt="Profile" />
-        <span>{tweet.user?.userName}</span> {/* Use optional chaining */}
+        <Avatar alt={tweet.user?.userName} src="/img/default-avatar.png" />
+        <span className="username">{tweet.user?.userName}</span>{" "}
       </div>
       {isEditing ? (
         <textarea
@@ -64,6 +68,7 @@ const TweetItem = ({ tweet, userId, onDelete, onUpdate }) => {
       ) : (
         <p>{tweet.tweetText}</p>
       )}
+      <img className="tweet_img" src={tweetImageUrl} alt="Random Tweet Image" />
       {tweet.media && (
         <img className="tweet_img" src={tweet.media} alt="tweet_img" />
       )}
@@ -84,9 +89,8 @@ const TweetItem = ({ tweet, userId, onDelete, onUpdate }) => {
         </button>
         <button className="button-tweet" onClick={handleComment}>
           <MessageSquare />
-          {/* Comment count is not available in the TweetResponseDto */}
         </button>
-        {tweet.user?.id === userId && ( // Use optional chaining
+        {tweet.user?.id === userId && (
           <>
             {isEditing ? (
               <button className="button-tweet" onClick={handleUpdate}>
