@@ -15,3 +15,15 @@ export const removeToken = () => {
 export const isLoggedIn = () => {
   return !!getToken();
 };
+
+export const setLoggedInUserId = (userId) => {
+  localStorage.setItem("userId", String(userId));
+};
+
+export const getLoggedInUserId = () => {
+  return localStorage.getItem("userId");
+};
+
+export const removeLoggedInUserId = () => {
+  localStorage.removeItem("userId");
+};

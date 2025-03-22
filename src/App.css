@@ -1,7 +1,7 @@
 body {
   display: flex;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
 }
 
@@ -10,7 +10,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-  align-items: center; 
+  align-items: center;
 }
 
 .layout-content {
@@ -18,12 +18,13 @@ body {
   flex-direction: row;
   flex: 1;
   max-width: 1200px;
-  width: 100%; 
+  width: 100%;
 }
 
+/* Sidebar Styles */
 .sidebar {
-  position: relative; 
-  height: auto; 
+  position: relative;
+  height: auto;
   width: 25%;
   background-color: white;
   padding: 30px;
@@ -38,18 +39,18 @@ body {
   font-size: large;
 }
 
-.sidebar ul { 
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .sidebar a {
   color: black;
-  text-decoration: none;
+  text-decoration: none; /* Remove underline */
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -63,9 +64,9 @@ body {
 }
 
 .profile img {
-  width: 50px; 
-  height: 50px; 
-  border-radius: 50%; 
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   margin-right: 10px;
   object-fit: cover;
 }
@@ -76,24 +77,25 @@ body {
 }
 
 .button-gonderi {
-    color: white;
-    background-color : black;
-    padding: 12px 20px;
-    border-radius: 30px;
-    width: 100%; 
-    text-align: center; 
+  color: white;
+  background-color: black;
+  padding: 12px 20px;
+  border-radius: 30px;
+  width: 100%;
+  text-align: center;
 }
 
 .button-cikis {
-    color: black; 
-    background-color: white; 
-    padding: 12px 20px;
-    border-radius: 30px;
-    width: 100%; 
-    text-align: center; 
-    border: 1px solid black; 
+  color: black;
+  background-color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid black;
 }
 
+/* Tweet Styles */
 .home {
   display: flex;
   align-items: center;
@@ -103,38 +105,37 @@ body {
 .tweet {
   display: flex;
   flex-direction: column;
-  padding: 10px; 
+  padding: 10px;
+  gap:20px;
   width: 75vb;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   border: 1px solid #e1e8ed;
-
 }
 
 .userProfile {
   display: flex;
-  justify-content: flex-start; 
+  justify-content: flex-start;
   align-items: center;
-  gap: 10px; 
-  padding: 10px; 
-  height: auto; 
+  gap: 10px;
+  padding: 10px;
+  height: auto;
 }
 
 .userProfile img {
-  width: 7%; 
+  width: 7%;
   height: 7%;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.userProfile span {
-  font-weight: bold;
-  font-size: 14px; 
+.username {
+  margin-left: 8px;
 }
 
 .tweet p {
   font-size: 14px;
-  margin: 0 10px; 
-  line-height: 1.4; 
+  margin: 0 10px;
+  line-height: 1.4;
 }
 
 .tweet_img {
@@ -143,16 +144,16 @@ body {
   align-items: center;
   max-width: 65%;
   aspect-ratio: 1/1;
-  border-radius: 10px;  
+  border-radius: 10px;
   margin: 0 auto;
 }
 
 .button-tweets {
   display: flex;
   justify-content: space-around;
-  padding: 5px 0; 
+  padding: 5px 0;
   text-align: center;
-  border-top: 1px solid #e1e8ed; 
+  border-top: 1px solid #e1e8ed;
 }
 
 .button-tweet {
@@ -161,40 +162,79 @@ body {
   border: none;
   width: 100%;
   display: flex;
-  justify-content: center; 
-  align-items: center; 
-  padding: 5px; 
-  cursor: pointer; 
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .button-tweet:hover {
-  color:black;
+  color: black;
 }
 
 .button-tweet svg {
-  width: 20px; 
+  width: 20px;
   height: 20px;
 }
 
 .button-tweet.active {
-  color: black; /* Change the color when active */
+  color: black; 
 }
 
-.main {
-  flex-grow: 1;
-  padding: 20px;
+/* Tweet Form Styles */
+.tweet-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%; 
+  margin-bottom: 20px;
+  gap: 10px;
+  position: relative;
+  padding: 10px;
+  border: 1px solid #e1e8ed;
+  border-radius: 5px;
 }
 
+.tweet-form-header {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+
+.tweet-form textarea {
+  padding: 10px;
+  border: none;
+  margin-bottom: 10px;
+  font-size: 16px;
+  resize: none;
+  height: 100px;
+  font-family: "Arial", sans-serif;
+}
+
+.tweet-form button {
+  color: white;
+  background-color: black;
+  padding: 12px 20px;
+  border-radius: 30px;
+  width: auto; /* Adjust width to content */
+  text-align: center;
+  cursor: pointer;
+  position: absolute; /* Position the button */
+  bottom: 10px; /* Align to the bottom */
+  right: 10px; /* Align to the right */
+}
+
+/* Login Styles */
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 500px; 
-  padding: 40px 80px; 
-  border-radius: 10px; 
+  max-width: 500px;
+  padding: 40px 80px;
+  border-radius: 10px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   background-color: #fff;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
 .login-form {
@@ -226,9 +266,9 @@ body {
   width: 100%;
   padding: 12px;
   border: 1.5px solid #ddd;
-  border-radius: 6px; 
+  border-radius: 6px;
   box-sizing: border-box;
-  font-size: 16px; 
+  font-size: 16px;
 }
 
 .login-button {
@@ -238,7 +278,7 @@ body {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 18px; 
+  font-size: 18px;
   transition: background-color 0.3s;
 }
 
@@ -255,4 +295,9 @@ body {
 .signup-link-text {
   color: #007bff;
   text-decoration: none;
+}
+
+.main {
+  flex-grow: 1;
+  padding: 20px;
 }

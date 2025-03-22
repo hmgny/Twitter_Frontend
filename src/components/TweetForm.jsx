@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createTweet } from "../utils/api";
 import Avatar from "@mui/material/Avatar";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 
 const TweetForm = ({ onTweetCreated }) => {
   const [tweetText, setTweetText] = useState("");

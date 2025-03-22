@@ -28,11 +28,16 @@ export const postTweet = async (tweet) => {
     });
 };
 
-export const fetchTweets = async () => {
+export const fetchTweets = async (userId) => {
     const token = localStorage.getItem('authToken');
 
     if (!token) {
         throw new Error("No auth token found");
+    }
+
+    let url = `${API_URL}/tweet`;
+    if (userId) {
+        url = `${API_URL}/tweet/user/${userId}`;
     }
 
     return axios.get(`http://localhost:3000/tweet`, {

@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { fetchTweets } from "../utils/api";
 import TweetItem from "./TweetItem";
 
-const TweetList = () => {
+const TweetList = ({ userId, isProfile }) => {
   const [tweets, setTweets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const userId = 1;
 
   useEffect(() => {
     const getTweets = async () => {
@@ -50,8 +49,8 @@ const TweetList = () => {
         <TweetItem
           key={tweet.id}
           tweet={tweet}
-          username={tweet.username}
           userId={userId}
+          isProfile={isProfile}
         />
       ))}
     </div>

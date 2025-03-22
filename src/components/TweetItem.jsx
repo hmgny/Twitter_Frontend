@@ -2,8 +2,9 @@ import React, { useState, useMemo } from "react";
 import { Heart, Repeat, MessageSquare, Edit, Trash2 } from "lucide-react";
 import { deleteTweet, updateTweet } from "../utils/api";
 import Avatar from "@mui/material/Avatar";
+import { Link } from "react-router-dom";
 
-const TweetItem = ({ tweet, userId, onDelete, onUpdate }) => {
+const TweetItem = ({ tweet, userId, onDelete, onUpdate, isProfile }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(tweet?.tweetText || "");
   const [isLiked, setIsLiked] = useState(false);
@@ -56,10 +57,10 @@ const TweetItem = ({ tweet, userId, onDelete, onUpdate }) => {
 
   return (
     <div className="tweet">
-      <div className="userProfile">
+      <Link to={`/profile/${tweet.userId}`} className="tweet-form-header">
         <Avatar alt={tweet.username} src="/img/default-avatar.png" />
-        <span className="username">{tweet.username}</span>{" "}
-      </div>
+        <p className="username">{tweet.username}</p>
+      </Link>
       {isEditing ? (
         <textarea
           value={editText}
@@ -90,7 +91,7 @@ const TweetItem = ({ tweet, userId, onDelete, onUpdate }) => {
         <button className="button-tweet" onClick={handleComment}>
           <MessageSquare />
         </button>
-        {tweet.user?.id === userId && (
+        {isProfile && tweet.user?.id === userId && (
           <>
             {isEditing ? (
               <button className="button-tweet" onClick={handleUpdate}>
