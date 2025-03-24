@@ -1,21 +1,15 @@
 import TweetForm from "../components/TweetForm";
 import TweetList from "../components/TweetList";
+import { TwitterContext } from "../contextApi.jsx/TwitterContext";
 import Layout from "../layout/Layout";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 
 const HomePage = () => {
+  const { userId } = useContext(TwitterContext);
+
   const handleNewTweet = (newTweet) => {
     // Handle the new tweet
   };
-
-  const [userId, setUserId] = useState(null);
-
-  useEffect(() => {
-    const storedUserId = localStorage.getItem("userId");
-    if (storedUserId) {
-      setUserId(parseInt(storedUserId, 10));
-    }
-  }, []);
 
   return (
     <Layout userId={userId}>
