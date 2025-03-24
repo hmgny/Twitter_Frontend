@@ -1,8 +1,14 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useContext, useEffect } from "react";
 import { Heart, Repeat, MessageSquare, Edit, Trash2 } from "lucide-react";
-import { deleteTweet, updateTweet } from "../utils/api";
+import {
+  deleteTweet,
+  updateTweet,
+  likeTweet,
+  dislikeTweet,
+} from "../utils/api";
 import Avatar from "@mui/material/Avatar";
 import { Link } from "react-router-dom";
+import { TwitterContext } from "../contextApi.jsx/TwitterContext";
 
 const TweetItem = ({ tweet, userId, onDelete, onUpdate, isProfile }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -11,6 +17,11 @@ const TweetItem = ({ tweet, userId, onDelete, onUpdate, isProfile }) => {
   const [likeCount, setLikeCount] = useState(tweet?.likeCount || 0);
   const [isRetweeted, setIsRetweeted] = useState(false);
   const [retweetCount, setRetweetCount] = useState(tweet?.retweetCount || 0);
+  const { loggedInUserId } = useContext(TwitterContext);
+
+  useEffect(() => {
+    setIsLiked(tweet.isLikedByUser);
+  }, [tweet.id]);
 
   const handleDelete = async () => {
     try {
@@ -33,10 +44,19 @@ const TweetItem = ({ tweet, userId, onDelete, onUpdate, isProfile }) => {
     }
   };
 
-  const handleLike = () => {
-    setIsLiked(!isLiked);
-    setLikeCount(isLiked ? likeCount - 1 : likeCount + 1);
-    console.log("Like clicked for tweet:", tweet.id);
+  const handleLikeClick = async () => {
+    try {
+      if (isLiked) {
+        await dislikeTweet(loggedInUserId, tweet.id);
+        setLikeCount(likeCount - 1);
+      } else {
+        await likeTweet(loggedInUserId, tweet.id);
+        setLikeCount(likeCount + 1);
+      }
+      setIsLiked(!isLiked);
+    } catch (error) {
+      console.error("Error liking/disliking tweet:", error);
+    }
   };
 
   const handleRetweet = () => {
@@ -76,7 +96,7 @@ const TweetItem = ({ tweet, userId, onDelete, onUpdate, isProfile }) => {
       <div className="button-tweets">
         <button
           className={`button-tweet ${isLiked ? "active" : ""}`}
-          onClick={handleLike}
+          onClick={handleLikeClick}
         >
           <Heart color={isLiked ? "red" : "currentColor"} />
           {likeCount > 0 && <span>{likeCount}</span>}

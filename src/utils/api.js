@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_URL = 'http://localhost:3000';
+const token = localStorage.getItem('authToken');
 
 export const login = async (credentials) => {
     const { username, password } = credentials;
@@ -80,3 +81,26 @@ export const updateTweet = async (tweetId, tweetText) => {
         throw error;
     }
 };
+
+export const likeTweet = async (userId, tweetId) => {
+    return axios.post(`${API_URL}/like`, null, {
+      params: {
+        userId: userId,
+        tweetId: tweetId,
+      },
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    });
+  };
+  
+  export const dislikeTweet = async (userId, tweetId) => {
+    return axios.post(`${API_URL}/dislike/${tweetId}`, null, {
+      params: {
+        userId: userId,
+      },
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    });
+  };
