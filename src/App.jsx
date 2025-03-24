@@ -1,9 +1,9 @@
 import { Switch, Route, useHistory } from "react-router-dom";
 import "./App.css";
-import HomePage from "./Pages/HomePage";
-import ProfilePage from "./Pages/ProfilePage";
-import LoginPage from "./Pages/LoginPage";
-import RegisterPage from "./Pages/RegisterPage";
+import HomePage from "./pages/HomePage";
+import ProfilePage from "./pages/ProfilePage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
