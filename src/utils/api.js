@@ -19,14 +19,6 @@ export const register = async (userData) => {
     return axios.post(`${API_URL}/register`, userData);
 };
 
-export const postTweet = async (tweet) => {
-    const token = localStorage.getItem('authToken');
-    return await axios.post('http://localhost:3000/tweets/user/{userId}', tweet, {
-        headers: {
-            Authorization: `Basic ${token}`
-        }
-    });
-};
 
 export const fetchTweets = async (userId) => {
     const token = localStorage.getItem('authToken');
@@ -57,18 +49,18 @@ export const getAllTweets = async () => {
 };
 
 export const createTweet = async (newTweet) => {
-    try {
-        const token = localStorage.getItem('authToken');
-        console.log("API'ye gönderilen tweet verisi:", newTweet);
-        const response = await axios.post(`${API_URL}/tweet/user`, newTweet, {
-            headers: {
-                Authorization: `Basic ${authToken}`,
-            },
-        });
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
+  try {
+    const token = localStorage.getItem('authToken'); // authToken'i localStorage'dan al
+    console.log("API'ye gönderilen tweet verisi:", newTweet);
+    const response = await axios.post(`${API_URL}/tweet/user`, newTweet, {
+      headers: {
+        Authorization: `Basic ${token}`, // token'i kullan
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const deleteTweet = async (tweetId) => {

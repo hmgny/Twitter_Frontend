@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createTweet } from "../utils/api";
 import Avatar from "@mui/material/Avatar";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const TweetForm = ({ onTweetCreated }) => {
   const [tweetText, setTweetText] = useState("");
@@ -16,12 +17,12 @@ const TweetForm = ({ onTweetCreated }) => {
 
   const handleTweetSubmit = async (e) => {
     e.preventDefault();
-    const storedUserId = localStorage.getItem("userId");
-    if (!storedUserId) {
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
       alert("Kullanıcı ID'si bulunamadı. Lütfen giriş yapın.");
       return;
     }
-    const userId = parseInt(storedUserId, 10);
+
     if (isNaN(userId)) {
       alert("Geçersiz kullanıcı ID'si.");
       return;
@@ -31,13 +32,12 @@ const TweetForm = ({ onTweetCreated }) => {
         userId: userId,
         tweetText: tweetText,
       };
-      console.log("Gönderilecek tweet:", newTweet);
       const response = await createTweet(newTweet);
       setTweetText("");
-      onTweetCreated(response);
+      onTweetCreated(response.data);
+      toast.success("Tweet başarıyla oluşturuldu!");
     } catch (error) {
-      console.error("Tweet oluşturma hatası:", error);
-      alert("Tweet oluşturulamadı.");
+      toast.error("Tweet oluşturulurken bir hata oluştu.");
     }
   };
 

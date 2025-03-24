@@ -16,7 +16,7 @@ const LoginPage = ({ setAuthenticated }) => {
       console.log("Login successful:", response.data);
       toast.success("Login successful!");
       history.push("/home");
-      localStorage.setItem("userId", response.data.id); // Store userId
+      localStorage.setItem("userId", response.data.userId);
       localStorage.setItem("username", response.data.userName);
       const authToken = btoa(`${username}:${password}`);
       localStorage.setItem("authToken", authToken);
