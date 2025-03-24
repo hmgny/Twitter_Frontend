@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   Home,
   Hash,
@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 
 const SideBar = () => {
   const [username, setUsername] = useState("");
+  const history = useHistory();
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
@@ -24,6 +25,13 @@ const SideBar = () => {
       setUsername(storedUsername);
     }
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    history.push("/");
+  };
 
   return (
     <div className="sidebar">
@@ -101,7 +109,9 @@ const SideBar = () => {
         <Avatar alt={username} src="/img/default-avatar.png" />
         <p className="username">{username}</p>
       </Link>
-      <button className="button-cikis">Çıkış Yap</button>
+      <button className="button-cikis" onClick={handleLogout}>
+        Çıkış Yap
+      </button>
     </div>
   );
 };
