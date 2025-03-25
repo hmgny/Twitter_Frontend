@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_URL = 'http://localhost:3000';
+const token = localStorage.getItem('authToken');
 
 export const login = async (credentials) => {
     const { username, password } = credentials;
@@ -14,10 +15,19 @@ export const login = async (credentials) => {
     }
 };
 
-
 export const register = async (userData) => {
-    return axios.post(`${API_URL}/register`, userData);
+  try {
+      const userName = userData.username;
+      const password = userData.password;
+   
+      const response = await axios.post(`${API_URL}/register`, { userName, password }); 
+      return response;
+  } catch (error) {
+      console.error("Registration API Error:", error);
+      throw error;
+  }
 };
+
 
 
 export const fetchTweets = async (userId) => {
@@ -80,3 +90,26 @@ export const updateTweet = async (tweetId, tweetText) => {
         throw error;
     }
 };
+
+export const likeTweet = async (userId, tweetId) => {
+    return axios.post(`${API_URL}/like`, null, {
+      params: {
+        userId: userId,
+        tweetId: tweetId,
+      },
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    });
+  };
+  
+  export const dislikeTweet = async (userId, tweetId) => {
+    return axios.post(`${API_URL}/dislike/${tweetId}`, null, {
+      params: {
+        userId: userId,
+      },
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    });
+  };

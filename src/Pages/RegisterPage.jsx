@@ -1,28 +1,33 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom"; // Import useHistory
-import { register } from "../utils/api"; // Import register function
-import { toast } from "react-toastify"; // Import toast
+import { useHistory } from "react-router-dom";
+import { register } from "../utils/api";
+import { toast } from "react-toastify";
 
 const RegisterPage = ({ onRegister }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory(); // Initialize history
+  const history = useHistory();
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await register({ username, password }); // Use register function from api.js
+      const response = await register({ username, password });
 
-      if (response.status === 201) {
-        // Assuming 201 is successful registration
+      if (response.status === 200 || response.status === 201) {
         toast.success("Registration successful!");
-        history.push("/login"); // Redirect to login page
+        history.push("/user/login");
       } else {
+        setError("Registration failed. Please try again.");
         toast.error("Registration failed. Please try again.");
       }
     } catch (error) {
       console.error("Registration error:", error);
+      setError(
+        error.response?.data?.message ||
+          "Registration failed. Please try again."
+      );
       toast.error(
         error.response?.data?.message ||
           "An error occurred. Please try again later."
@@ -34,6 +39,7 @@ const RegisterPage = ({ onRegister }) => {
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">
         <h2 className="login-title">REGISTER</h2>
+        {error && <p className="error">{error}</p>}
         <div className="input-group">
           <label htmlFor="username" className="input-label">
             User Name
@@ -67,7 +73,7 @@ const RegisterPage = ({ onRegister }) => {
         </button>
         <p className="signup-link">
           Already have an account?
-          <a href="/login" className="signup-link-text">
+          <a href="/user/login" className="signup-link-text">
             Login
           </a>
         </p>
